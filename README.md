@@ -6,7 +6,7 @@ with the communication of the HTTP API using AXIOS.
 ## Installation
 
 ```
- npm i loki-nodejs-api
+npm i loki-api
 ```
 
 ## Example Usage
