@@ -1,4 +1,4 @@
-# loki-api
+# loki-nodejs-client
 
 Loki is a part of the Grafana Labs. This package helps
 with the communication of the HTTP API using AXIOS.
@@ -6,7 +6,7 @@ with the communication of the HTTP API using AXIOS.
 ## Installation
 
 ```
-npm i loki-api
+npm i loki-nodejs-client
 ```
 
 ## Example Usage
