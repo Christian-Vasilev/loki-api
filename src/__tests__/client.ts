@@ -26,3 +26,18 @@ describe('Healthcheck', () => {
     });
 });
 
+describe('Streams', () => {
+    it('can add stream and publish it', async () => {
+        mock.onPost('/loki/api/v1/push').replyOnce(204);
+
+        const response = await client.addStream('TestStream', [
+            [
+                '1667032608500000000',
+                'This is a pure test'
+            ]
+        ]).push();
+
+        expect(response).toEqual(true);
+    });
+})
+
