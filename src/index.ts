@@ -5,19 +5,23 @@ interface Streams {
 }
 
 interface StreamData {
-    stream: object,
-    values: [string, string][]
+    stream: Label;
+    values: [string, string][];
+}
+
+interface Label {
+    label: string
 }
 
 export default class Client extends Api {
-    data: Streams = {
+    protected readonly data: Streams = {
         streams: []
     };
 
     /**
      * Health heck for API endpoint
      */
-    public storageHealthCheck = async (): Promise<boolean> => {
+    public async storageHealthCheck(): Promise<boolean> {
         try {
             const response = await this.instance.get('/ready');
 
@@ -28,12 +32,19 @@ export default class Client extends Api {
     };
 
     /**
+     * Retrieve all streams
+     */
+    public getStreams() {
+        return this.data;
+    }
+
+    /**
      * Adding stream to the list of streams
      *
      * @param label
      * @param values
      */
-    public addStream = (label: string, values: [string, string][]): this => {
+    public addStream(label: string, values: [string, string][]): this {
         const newStream: StreamData = {
             "stream": {
                 label
@@ -49,10 +60,12 @@ export default class Client extends Api {
     /**
      * Pushing to the API the already appended streams to the list of streams.
      */
-    public push = async (): Promise<boolean> => {
+     public async push(): Promise<boolean> {
         if (this.data.streams.length) {
             try {
                 const response = await this.instance.post('/loki/api/v1/push', this.data);
+
+                this.data.streams = [];
 
                 return true;
             } catch (e) {

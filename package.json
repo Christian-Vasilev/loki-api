@@ -18,6 +18,10 @@
   "files": [
     "lib/**/*"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Christian-Vasilev/loki-nodejs-client"
+  },
   "keywords": [
     "loki",
     "loki-nodejs",
